@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>.link {  fill: none;  stroke: #666;  stroke-width: 1.5px;}#licensing {  fill: green;}.link.licensing {  stroke: green;}.link.resolved {  stroke-dasharray: 0,2 1;}circle {  fill: #ccc;  stroke: #333;  stroke-width: 1.5px;}text {  font: 12px Microsoft YaHei;  pointer-events: none;  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;}.linetext {    font-size: 12px Microsoft YaHei;}</style>
+<body>
+<input type="file" id="files" style="display: none" />
+<script src="d3.v3.min.js"></script>
+<script>
+
+
+
+var links = 
+[
+{source: '510-105378', target: '508-45287', 'rela': '0', type: 'resolved'},
+{source: '508-45287', target: '504-21895', 'rela': '0', type: 'resolved'},
+{source: '504-21895', target: '496-10741', 'rela': '0', type: 'resolved'},
+{source: '496-10741', target: '481-5324', 'rela': '0', type: 'resolved'},
+{source: '481-5324', target: '451-2651', 'rela': '0', type: 'resolved'},
+{source: '451-2651', target: '392-1321', 'rela': '0', type: 'resolved'},
+{source: '392-1321', target: '278-659', 'rela': '0', type: 'resolved'},
+{source: '278-659', target: '255-329', 'rela': '0', type: 'resolved'},
+{source: '278-659', target: '204-330', 'rela': '1', type: 'resolved'},
+{source: '392-1321', target: '279-662', 'rela': '1', type: 'resolved'},
+{source: '279-662', target: '163-331', 'rela': '0', type: 'resolved'},
+{source: '279-662', target: '181-331', 'rela': '1', type: 'resolved'},
+{source: '451-2651', target: '393-1330', 'rela': '1', type: 'resolved'},
+{source: '393-1330', target: '280-664', 'rela': '0', type: 'resolved'},
+{source: '280-664', target: '131-332', 'rela': '0', type: 'resolved'},
+{source: '280-664', target: '211-332', 'rela': '1', type: 'resolved'},
+{source: '393-1330', target: '281-666', 'rela': '1', type: 'resolved'},
+{source: '281-666', target: '20-333', 'rela': '0', type: 'resolved'},
+{source: '281-666', target: '42-333', 'rela': '1', type: 'resolved'},
+{source: '481-5324', target: '452-2673', 'rela': '1', type: 'resolved'},
+{source: '452-2673', target: '394-1334', 'rela': '0', type: 'resolved'},
+{source: '394-1334', target: '282-666', 'rela': '0', type: 'resolved'},
+{source: '282-666', target: '134-333', 'rela': '0', type: 'resolved'},
+{source: '282-666', target: '140-333', 'rela': '1', type: 'resolved'},
+{source: '394-1334', target: '283-668', 'rela': '1', type: 'resolved'},
+{source: '283-668', target: '34-334', 'rela': '0', type: 'resolved'},
+{source: '283-668', target: '174-334', 'rela': '1', type: 'resolved'},
+{source: '452-2673', target: '395-1339', 'rela': '1', type: 'resolved'},
+{source: '395-1339', target: '284-669', 'rela': '0', type: 'resolved'},
+{source: '284-669', target: '245-334', 'rela': '0', type: 'resolved'},
+{source: '284-669', target: '6-335', 'rela': '1', type: 'resolved'},
+{source: '395-1339', target: '285-670', 'rela': '1', type: 'resolved'},
+{source: '285-670', target: '46-335', 'rela': '0', type: 'resolved'},
+{source: '285-670', target: '77-335', 'rela': '1', type: 'resolved'},
+{source: '496-10741', target: '482-5417', 'rela': '1', type: 'resolved'},
+{source: '482-5417', target: '453-2694', 'rela': '0', type: 'resolved'},
+{source: '453-2694', target: '396-1344', 'rela': '0', type: 'resolved'},
+{source: '396-1344', target: '286-671', 'rela': '0', type: 'resolved'},
+{source: '286-671', target: '107-335', 'rela': '0', type: 'resolved'},
+{source: '286-671', target: '85-336', 'rela': '1', type: 'resolved'},
+{source: '396-1344', target: '287-673', 'rela': '1', type: 'resolved'},
+{source: '287-673', target: '136-336', 'rela': '0', type: 'resolved'},
+{source: '287-673', target: '21-337', 'rela': '1', type: 'resolved'},
+{source: '453-2694', target: '397-1350', 'rela': '1', type: 'resolved'},
+{source: '397-1350', target: '288-674', 'rela': '0', type: 'resolved'},
+{source: '288-674', target: '194-337', 'rela': '0', type: 'resolved'},
+{source: '288-674', target: '234-337', 'rela': '1', type: 'resolved'},
+{source: '397-1350', target: '289-676', 'rela': '1', type: 'resolved'},
+{source: '289-676', target: '35-338', 'rela': '0', type: 'resolved'},
+{source: '289-676', target: '149-338', 'rela': '1', type: 'resolved'},
+{source: '482-5417', target: '454-2723', 'rela': '1', type: 'resolved'},
+{source: '454-2723', target: '398-1356', 'rela': '0', type: 'resolved'},
+{source: '398-1356', target: '290-678', 'rela': '0', type: 'resolved'},
+{source: '290-678', target: '185-339', 'rela': '0', type: 'resolved'},
+{source: '290-678', target: '193-339', 'rela': '1', type: 'resolved'},
+{source: '398-1356', target: '291-678', 'rela': '1', type: 'resolved'},
+{source: '291-678', target: '200-339', 'rela': '0', type: 'resolved'},
+{source: '291-678', target: '241-339', 'rela': '1', type: 'resolved'},
+{source: '454-2723', target: '399-1367', 'rela': '1', type: 'resolved'},
+{source: '399-1367', target: '292-683', 'rela': '0', type: 'resolved'},
+{source: '292-683', target: '27-341', 'rela': '0', type: 'resolved'},
+{source: '292-683', target: '22-342', 'rela': '1', type: 'resolved'},
+{source: '399-1367', target: '293-684', 'rela': '1', type: 'resolved'},
+{source: '293-684', target: '122-342', 'rela': '0', type: 'resolved'},
+{source: '293-684', target: '138-342', 'rela': '1', type: 'resolved'},
+{source: '504-21895', target: '497-11154', 'rela': '1', type: 'resolved'},
+{source: '497-11154', target: '483-5525', 'rela': '0', type: 'resolved'},
+{source: '483-5525', target: '455-2749', 'rela': '0', type: 'resolved'},
+{source: '455-2749', target: '400-1370', 'rela': '0', type: 'resolved'},
+{source: '400-1370', target: '294-684', 'rela': '0', type: 'resolved'},
+{source: '294-684', target: '178-342', 'rela': '0', type: 'resolved'},
+{source: '294-684', target: '192-342', 'rela': '1', type: 'resolved'},
+{source: '400-1370', target: '295-686', 'rela': '1', type: 'resolved'},
+{source: '295-686', target: '1-343', 'rela': '0', type: 'resolved'},
+{source: '295-686', target: '91-343', 'rela': '1', type: 'resolved'},
+{source: '455-2749', target: '401-1379', 'rela': '1', type: 'resolved'},
+{source: '401-1379', target: '296-688', 'rela': '0', type: 'resolved'},
+{source: '296-688', target: '104-344', 'rela': '0', type: 'resolved'},
+{source: '296-688', target: '157-344', 'rela': '1', type: 'resolved'},
+{source: '401-1379', target: '297-691', 'rela': '1', type: 'resolved'},
+{source: '297-691', target: '187-345', 'rela': '0', type: 'resolved'},
+{source: '297-691', target: '66-346', 'rela': '1', type: 'resolved'},
+{source: '483-5525', target: '456-2776', 'rela': '1', type: 'resolved'},
+{source: '456-2776', target: '402-1385', 'rela': '0', type: 'resolved'},
+{source: '402-1385', target: '298-692', 'rela': '0', type: 'resolved'},
+{source: '298-692', target: '177-346', 'rela': '0', type: 'resolved'},
+{source: '298-692', target: '213-346', 'rela': '1', type: 'resolved'},
+{source: '402-1385', target: '299-693', 'rela': '1', type: 'resolved'},
+{source: '299-693', target: '220-346', 'rela': '0', type: 'resolved'},
+{source: '299-693', target: '25-347', 'rela': '1', type: 'resolved'},
+{source: '456-2776', target: '403-1391', 'rela': '1', type: 'resolved'},
+{source: '403-1391', target: '300-695', 'rela': '0', type: 'resolved'},
+{source: '300-695', target: '183-347', 'rela': '0', type: 'resolved'},
+{source: '300-695', target: '58-348', 'rela': '1', type: 'resolved'},
+{source: '403-1391', target: '301-696', 'rela': '1', type: 'resolved'},
+{source: '301-696', target: '69-348', 'rela': '0', type: 'resolved'},
+{source: '301-696', target: '155-348', 'rela': '1', type: 'resolved'},
+{source: '497-11154', target: '484-5629', 'rela': '1', type: 'resolved'},
+{source: '484-5629', target: '457-2802', 'rela': '0', type: 'resolved'},
+{source: '457-2802', target: '404-1398', 'rela': '0', type: 'resolved'},
+{source: '404-1398', target: '101-699', 'rela': '0', type: 'resolved'},
+{source: '404-1398', target: '302-699', 'rela': '1', type: 'resolved'},
+{source: '302-699', target: '151-349', 'rela': '0', type: 'resolved'},
+{source: '302-699', target: '169-350', 'rela': '1', type: 'resolved'},
+{source: '457-2802', target: '405-1404', 'rela': '1', type: 'resolved'},
+{source: '405-1404', target: '303-701', 'rela': '0', type: 'resolved'},
+{source: '303-701', target: '186-350', 'rela': '0', type: 'resolved'},
+{source: '303-701', target: '160-351', 'rela': '1', type: 'resolved'},
+{source: '405-1404', target: '304-703', 'rela': '1', type: 'resolved'},
+{source: '304-703', target: '246-351', 'rela': '0', type: 'resolved'},
+{source: '304-703', target: '75-352', 'rela': '1', type: 'resolved'},
+{source: '484-5629', target: '458-2827', 'rela': '1', type: 'resolved'},
+{source: '458-2827', target: '406-1412', 'rela': '0', type: 'resolved'},
+{source: '406-1412', target: '305-706', 'rela': '0', type: 'resolved'},
+{source: '305-706', target: '165-353', 'rela': '0', type: 'resolved'},
+{source: '305-706', target: '223-353', 'rela': '1', type: 'resolved'},
+{source: '406-1412', target: '306-706', 'rela': '1', type: 'resolved'},
+{source: '306-706', target: '226-353', 'rela': '0', type: 'resolved'},
+{source: '306-706', target: '230-353', 'rela': '1', type: 'resolved'},
+{source: '458-2827', target: '407-1415', 'rela': '1', type: 'resolved'},
+{source: '407-1415', target: '307-707', 'rela': '0', type: 'resolved'},
+{source: '307-707', target: '240-353', 'rela': '0', type: 'resolved'},
+{source: '307-707', target: '28-354', 'rela': '1', type: 'resolved'},
+{source: '407-1415', target: '308-708', 'rela': '1', type: 'resolved'},
+{source: '308-708', target: '128-354', 'rela': '0', type: 'resolved'},
+{source: '308-708', target: '152-354', 'rela': '1', type: 'resolved'},
+{source: '508-45287', target: '505-23392', 'rela': '1', type: 'resolved'},
+{source: '505-23392', target: '498-11496', 'rela': '0', type: 'resolved'},
+{source: '498-11496', target: '485-5705', 'rela': '0', type: 'resolved'},
+{source: '485-5705', target: '459-2840', 'rela': '0', type: 'resolved'},
+{source: '459-2840', target: '408-1417', 'rela': '0', type: 'resolved'},
+{source: '408-1417', target: '309-708', 'rela': '0', type: 'resolved'},
+{source: '309-708', target: '158-354', 'rela': '0', type: 'resolved'},
+{source: '309-708', target: '167-354', 'rela': '1', type: 'resolved'},
+{source: '408-1417', target: '310-709', 'rela': '1', type: 'resolved'},
+{source: '310-709', target: '215-354', 'rela': '0', type: 'resolved'},
+{source: '310-709', target: '44-355', 'rela': '1', type: 'resolved'},
+{source: '459-2840', target: '409-1423', 'rela': '1', type: 'resolved'},
+{source: '409-1423', target: '311-710', 'rela': '0', type: 'resolved'},
+{source: '311-710', target: '147-355', 'rela': '0', type: 'resolved'},
+{source: '311-710', target: '219-355', 'rela': '1', type: 'resolved'},
+{source: '409-1423', target: '312-713', 'rela': '1', type: 'resolved'},
+{source: '312-713', target: '191-356', 'rela': '0', type: 'resolved'},
+{source: '312-713', target: '78-357', 'rela': '1', type: 'resolved'},
+{source: '485-5705', target: '460-2865', 'rela': '1', type: 'resolved'},
+{source: '460-2865', target: '410-1430', 'rela': '0', type: 'resolved'},
+{source: '410-1430', target: '313-714', 'rela': '0', type: 'resolved'},
+{source: '313-714', target: '80-357', 'rela': '0', type: 'resolved'},
+{source: '313-714', target: '209-357', 'rela': '1', type: 'resolved'},
+{source: '410-1430', target: '314-716', 'rela': '1', type: 'resolved'},
+{source: '314-716', target: '18-358', 'rela': '0', type: 'resolved'},
+{source: '314-716', target: '144-358', 'rela': '1', type: 'resolved'},
+{source: '460-2865', target: '411-1435', 'rela': '1', type: 'resolved'},
+{source: '411-1435', target: '315-717', 'rela': '0', type: 'resolved'},
+{source: '315-717', target: '175-358', 'rela': '0', type: 'resolved'},
+{source: '315-717', target: '74-359', 'rela': '1', type: 'resolved'},
+{source: '411-1435', target: '316-718', 'rela': '1', type: 'resolved'},
+{source: '316-718', target: '179-359', 'rela': '0', type: 'resolved'},
+{source: '316-718', target: '254-359', 'rela': '1', type: 'resolved'},
+{source: '498-11496', target: '486-5791', 'rela': '1', type: 'resolved'},
+{source: '486-5791', target: '461-2884', 'rela': '0', type: 'resolved'},
+{source: '461-2884', target: '412-1440', 'rela': '0', type: 'resolved'},
+{source: '412-1440', target: '317-720', 'rela': '0', type: 'resolved'},
+{source: '317-720', target: '26-360', 'rela': '0', type: 'resolved'},
+{source: '317-720', target: '33-360', 'rela': '1', type: 'resolved'},
+{source: '412-1440', target: '318-720', 'rela': '1', type: 'resolved'},
+{source: '318-720', target: '61-360', 'rela': '0', type: 'resolved'},
+{source: '318-720', target: '94-360', 'rela': '1', type: 'resolved'},
+{source: '461-2884', target: '413-1444', 'rela': '1', type: 'resolved'},
+{source: '413-1444', target: '319-721', 'rela': '0', type: 'resolved'},
+{source: '319-721', target: '214-360', 'rela': '0', type: 'resolved'},
+{source: '319-721', target: '83-361', 'rela': '1', type: 'resolved'},
+{source: '413-1444', target: '320-723', 'rela': '1', type: 'resolved'},
+{source: '320-723', target: '142-361', 'rela': '0', type: 'resolved'},
+{source: '320-723', target: '30-362', 'rela': '1', type: 'resolved'},
+{source: '486-5791', target: '462-2907', 'rela': '1', type: 'resolved'},
+{source: '462-2907', target: '414-1450', 'rela': '0', type: 'resolved'},
+{source: '414-1450', target: '321-724', 'rela': '0', type: 'resolved'},
+{source: '321-724', target: '164-362', 'rela': '0', type: 'resolved'},
+{source: '321-724', target: '229-362', 'rela': '1', type: 'resolved'},
+{source: '414-1450', target: '322-726', 'rela': '1', type: 'resolved'},
+{source: '322-726', target: '67-363', 'rela': '0', type: 'resolved'},
+{source: '322-726', target: '190-363', 'rela': '1', type: 'resolved'},
+{source: '462-2907', target: '415-1457', 'rela': '1', type: 'resolved'},
+{source: '415-1457', target: '323-727', 'rela': '0', type: 'resolved'},
+{source: '323-727', target: '195-363', 'rela': '0', type: 'resolved'},
+{source: '323-727', target: '53-364', 'rela': '1', type: 'resolved'},
+{source: '415-1457', target: '324-730', 'rela': '1', type: 'resolved'},
+{source: '324-730', target: '81-365', 'rela': '0', type: 'resolved'},
+{source: '324-730', target: '92-365', 'rela': '1', type: 'resolved'},
+{source: '505-23392', target: '499-11896', 'rela': '1', type: 'resolved'},
+{source: '499-11896', target: '487-5897', 'rela': '0', type: 'resolved'},
+{source: '487-5897', target: '463-2934', 'rela': '0', type: 'resolved'},
+{source: '463-2934', target: '416-1464', 'rela': '0', type: 'resolved'},
+{source: '416-1464', target: '325-731', 'rela': '0', type: 'resolved'},
+{source: '325-731', target: '252-365', 'rela': '0', type: 'resolved'},
+{source: '325-731', target: '71-366', 'rela': '1', type: 'resolved'},
+{source: '416-1464', target: '326-733', 'rela': '1', type: 'resolved'},
+{source: '326-733', target: '216-366', 'rela': '0', type: 'resolved'},
+{source: '326-733', target: '93-367', 'rela': '1', type: 'resolved'},
+{source: '463-2934', target: '417-1470', 'rela': '1', type: 'resolved'},
+{source: '417-1470', target: '327-734', 'rela': '0', type: 'resolved'},
+{source: '327-734', target: '133-367', 'rela': '0', type: 'resolved'},
+{source: '327-734', target: '253-367', 'rela': '1', type: 'resolved'},
+{source: '417-1470', target: '328-736', 'rela': '1', type: 'resolved'},
+{source: '328-736', target: '95-368', 'rela': '0', type: 'resolved'},
+{source: '328-736', target: '139-368', 'rela': '1', type: 'resolved'},
+{source: '487-5897', target: '464-2963', 'rela': '1', type: 'resolved'},
+{source: '464-2963', target: '418-1477', 'rela': '0', type: 'resolved'},
+{source: '418-1477', target: '329-737', 'rela': '0', type: 'resolved'},
+{source: '329-737', target: '237-368', 'rela': '0', type: 'resolved'},
+{source: '329-737', target: '243-369', 'rela': '1', type: 'resolved'},
+{source: '418-1477', target: '330-740', 'rela': '1', type: 'resolved'},
+{source: '330-740', target: '205-370', 'rela': '0', type: 'resolved'},
+{source: '330-740', target: '221-370', 'rela': '1', type: 'resolved'},
+{source: '464-2963', target: '419-1486', 'rela': '1', type: 'resolved'},
+{source: '419-1486', target: '331-742', 'rela': '0', type: 'resolved'},
+{source: '331-742', target: '37-371', 'rela': '0', type: 'resolved'},
+{source: '331-742', target: '236-371', 'rela': '1', type: 'resolved'},
+{source: '419-1486', target: '332-744', 'rela': '1', type: 'resolved'},
+{source: '332-744', target: '45-372', 'rela': '0', type: 'resolved'},
+{source: '332-744', target: '118-372', 'rela': '1', type: 'resolved'},
+{source: '499-11896', target: '488-5999', 'rela': '1', type: 'resolved'},
+{source: '488-5999', target: '465-2988', 'rela': '0', type: 'resolved'},
+{source: '465-2988', target: '420-1491', 'rela': '0', type: 'resolved'},
+{source: '420-1491', target: '333-745', 'rela': '0', type: 'resolved'},
+{source: '333-745', target: '225-372', 'rela': '0', type: 'resolved'},
+{source: '333-745', target: '88-373', 'rela': '1', type: 'resolved'},
+{source: '420-1491', target: '334-746', 'rela': '1', type: 'resolved'},
+{source: '334-746', target: '127-373', 'rela': '0', type: 'resolved'},
+{source: '334-746', target: '197-373', 'rela': '1', type: 'resolved'},
+{source: '465-2988', target: '421-1497', 'rela': '1', type: 'resolved'},
+{source: '421-1497', target: '335-748', 'rela': '0', type: 'resolved'},
+{source: '335-748', target: '40-374', 'rela': '0', type: 'resolved'},
+{source: '335-748', target: '87-374', 'rela': '1', type: 'resolved'},
+{source: '421-1497', target: '336-749', 'rela': '1', type: 'resolved'},
+{source: '336-749', target: '231-374', 'rela': '0', type: 'resolved'},
+{source: '336-749', target: '16-375', 'rela': '1', type: 'resolved'},
+{source: '488-5999', target: '466-3011', 'rela': '1', type: 'resolved'},
+{source: '466-3011', target: '422-1504', 'rela': '0', type: 'resolved'},
+{source: '422-1504', target: '337-752', 'rela': '0', type: 'resolved'},
+{source: '337-752', target: '52-376', 'rela': '0', type: 'resolved'},
+{source: '337-752', target: '79-376', 'rela': '1', type: 'resolved'},
+{source: '422-1504', target: '338-752', 'rela': '1', type: 'resolved'},
+{source: '338-752', target: '184-376', 'rela': '0', type: 'resolved'},
+{source: '338-752', target: '202-376', 'rela': '1', type: 'resolved'},
+{source: '466-3011', target: '423-1507', 'rela': '1', type: 'resolved'},
+{source: '423-1507', target: '339-752', 'rela': '0', type: 'resolved'},
+{source: '339-752', target: '206-376', 'rela': '0', type: 'resolved'},
+{source: '339-752', target: '227-376', 'rela': '1', type: 'resolved'},
+{source: '423-1507', target: '340-755', 'rela': '1', type: 'resolved'},
+{source: '340-755', target: '233-377', 'rela': '0', type: 'resolved'},
+{source: '340-755', target: '29-378', 'rela': '1', type: 'resolved'},
+{source: '510-105378', target: '509-60091', 'rela': '1', type: 'resolved'},
+{source: '509-60091', target: '506-25641', 'rela': '0', type: 'resolved'},
+{source: '506-25641', target: '500-12411', 'rela': '0', type: 'resolved'},
+{source: '500-12411', target: '489-6124', 'rela': '0', type: 'resolved'},
+{source: '489-6124', target: '467-3041', 'rela': '0', type: 'resolved'},
+{source: '467-3041', target: '424-1515', 'rela': '0', type: 'resolved'},
+{source: '424-1515', target: '341-756', 'rela': '0', type: 'resolved'},
+{source: '341-756', target: '109-378', 'rela': '0', type: 'resolved'},
+{source: '341-756', target: '224-378', 'rela': '1', type: 'resolved'},
+{source: '424-1515', target: '342-759', 'rela': '1', type: 'resolved'},
+{source: '342-759', target: '55-379', 'rela': '0', type: 'resolved'},
+{source: '342-759', target: '145-380', 'rela': '1', type: 'resolved'},
+{source: '467-3041', target: '425-1526', 'rela': '1', type: 'resolved'},
+{source: '425-1526', target: '343-761', 'rela': '0', type: 'resolved'},
+{source: '343-761', target: '238-380', 'rela': '0', type: 'resolved'},
+{source: '343-761', target: '41-381', 'rela': '1', type: 'resolved'},
+{source: '425-1526', target: '344-765', 'rela': '1', type: 'resolved'},
+{source: '344-765', target: '228-382', 'rela': '0', type: 'resolved'},
+{source: '344-765', target: '141-383', 'rela': '1', type: 'resolved'},
+{source: '489-6124', target: '468-3083', 'rela': '1', type: 'resolved'},
+{source: '468-3083', target: '426-1538', 'rela': '0', type: 'resolved'},
+{source: '426-1538', target: '345-768', 'rela': '0', type: 'resolved'},
+{source: '345-768', target: '7-384', 'rela': '0', type: 'resolved'},
+{source: '345-768', target: '72-384', 'rela': '1', type: 'resolved'},
+{source: '426-1538', target: '346-770', 'rela': '1', type: 'resolved'},
+{source: '346-770', target: '39-385', 'rela': '0', type: 'resolved'},
+{source: '346-770', target: '63-385', 'rela': '1', type: 'resolved'},
+{source: '468-3083', target: '427-1545', 'rela': '1', type: 'resolved'},
+{source: '427-1545', target: '347-770', 'rela': '0', type: 'resolved'},
+{source: '347-770', target: '76-385', 'rela': '0', type: 'resolved'},
+{source: '347-770', target: '199-385', 'rela': '1', type: 'resolved'},
+{source: '427-1545', target: '348-775', 'rela': '1', type: 'resolved'},
+{source: '348-775', target: '103-387', 'rela': '0', type: 'resolved'},
+{source: '348-775', target: '11-388', 'rela': '1', type: 'resolved'},
+{source: '500-12411', target: '490-6287', 'rela': '1', type: 'resolved'},
+{source: '490-6287', target: '469-3125', 'rela': '0', type: 'resolved'},
+{source: '469-3125', target: '428-1555', 'rela': '0', type: 'resolved'},
+{source: '428-1555', target: '349-776', 'rela': '0', type: 'resolved'},
+{source: '349-776', target: '19-388', 'rela': '0', type: 'resolved'},
+{source: '349-776', target: '117-388', 'rela': '1', type: 'resolved'},
+{source: '428-1555', target: '350-779', 'rela': '1', type: 'resolved'},
+{source: '350-779', target: '207-388', 'rela': '0', type: 'resolved'},
+{source: '350-779', target: '156-391', 'rela': '1', type: 'resolved'},
+{source: '469-3125', target: '429-1570', 'rela': '1', type: 'resolved'},
+{source: '429-1570', target: '351-784', 'rela': '0', type: 'resolved'},
+{source: '351-784', target: '217-392', 'rela': '0', type: 'resolved'},
+{source: '351-784', target: '235-392', 'rela': '1', type: 'resolved'},
+{source: '429-1570', target: '352-786', 'rela': '1', type: 'resolved'},
+{source: '352-786', target: '105-393', 'rela': '0', type: 'resolved'},
+{source: '352-786', target: '125-393', 'rela': '1', type: 'resolved'},
+{source: '490-6287', target: '470-3162', 'rela': '1', type: 'resolved'},
+{source: '470-3162', target: '430-1578', 'rela': '0', type: 'resolved'},
+{source: '430-1578', target: '353-788', 'rela': '0', type: 'resolved'},
+{source: '353-788', target: '31-394', 'rela': '0', type: 'resolved'},
+{source: '353-788', target: '84-394', 'rela': '1', type: 'resolved'},
+{source: '430-1578', target: '354-790', 'rela': '1', type: 'resolved'},
+{source: '354-790', target: '15-395', 'rela': '0', type: 'resolved'},
+{source: '354-790', target: '249-395', 'rela': '1', type: 'resolved'},
+{source: '470-3162', target: '431-1584', 'rela': '1', type: 'resolved'},
+{source: '431-1584', target: '355-791', 'rela': '0', type: 'resolved'},
+{source: '355-791', target: '251-395', 'rela': '0', type: 'resolved'},
+{source: '355-791', target: '57-396', 'rela': '1', type: 'resolved'},
+{source: '431-1584', target: '356-793', 'rela': '1', type: 'resolved'},
+{source: '356-793', target: '123-396', 'rela': '0', type: 'resolved'},
+{source: '356-793', target: '102-397', 'rela': '1', type: 'resolved'},
+{source: '506-25641', target: '501-13230', 'rela': '1', type: 'resolved'},
+{source: '501-13230', target: '491-6457', 'rela': '0', type: 'resolved'},
+{source: '491-6457', target: '471-3212', 'rela': '0', type: 'resolved'},
+{source: '471-3212', target: '432-1599', 'rela': '0', type: 'resolved'},
+{source: '432-1599', target: '357-798', 'rela': '0', type: 'resolved'},
+{source: '357-798', target: '143-398', 'rela': '0', type: 'resolved'},
+{source: '357-798', target: '148-400', 'rela': '1', type: 'resolved'},
+{source: '432-1599', target: '358-801', 'rela': '1', type: 'resolved'},
+{source: '358-801', target: '159-400', 'rela': '0', type: 'resolved'},
+{source: '358-801', target: '50-401', 'rela': '1', type: 'resolved'},
+{source: '471-3212', target: '433-1613', 'rela': '1', type: 'resolved'},
+{source: '433-1613', target: '359-805', 'rela': '0', type: 'resolved'},
+{source: '359-805', target: '189-401', 'rela': '0', type: 'resolved'},
+{source: '359-805', target: '112-404', 'rela': '1', type: 'resolved'},
+{source: '433-1613', target: '360-808', 'rela': '1', type: 'resolved'},
+{source: '360-808', target: '121-404', 'rela': '0', type: 'resolved'},
+{source: '360-808', target: '248-404', 'rela': '1', type: 'resolved'},
+{source: '491-6457', target: '472-3245', 'rela': '1', type: 'resolved'},
+{source: '472-3245', target: '32-1618', 'rela': '0', type: 'resolved'},
+{source: '472-3245', target: '434-1627', 'rela': '1', type: 'resolved'},
+{source: '434-1627', target: '361-811', 'rela': '0', type: 'resolved'},
+{source: '361-811', target: '120-405', 'rela': '0', type: 'resolved'},
+{source: '361-811', target: '23-406', 'rela': '1', type: 'resolved'},
+{source: '434-1627', target: '362-816', 'rela': '1', type: 'resolved'},
+{source: '362-816', target: '108-408', 'rela': '0', type: 'resolved'},
+{source: '362-816', target: '124-408', 'rela': '1', type: 'resolved'},
+{source: '501-13230', target: '492-6773', 'rela': '1', type: 'resolved'},
+{source: '492-6773', target: '473-3333', 'rela': '0', type: 'resolved'},
+{source: '473-3333', target: '435-1651', 'rela': '0', type: 'resolved'},
+{source: '435-1651', target: '363-822', 'rela': '0', type: 'resolved'},
+{source: '363-822', target: '14-410', 'rela': '0', type: 'resolved'},
+{source: '363-822', target: '51-412', 'rela': '1', type: 'resolved'},
+{source: '435-1651', target: '364-829', 'rela': '1', type: 'resolved'},
+{source: '364-829', target: '70-414', 'rela': '0', type: 'resolved'},
+{source: '364-829', target: '135-415', 'rela': '1', type: 'resolved'},
+{source: '473-3333', target: '436-1682', 'rela': '1', type: 'resolved'},
+{source: '436-1682', target: '365-839', 'rela': '0', type: 'resolved'},
+{source: '365-839', target: '99-419', 'rela': '0', type: 'resolved'},
+{source: '365-839', target: '73-420', 'rela': '1', type: 'resolved'},
+{source: '436-1682', target: '366-843', 'rela': '1', type: 'resolved'},
+{source: '366-843', target: '106-421', 'rela': '0', type: 'resolved'},
+{source: '366-843', target: '49-422', 'rela': '1', type: 'resolved'},
+{source: '492-6773', target: '474-3440', 'rela': '1', type: 'resolved'},
+{source: '474-3440', target: '437-1700', 'rela': '0', type: 'resolved'},
+{source: '437-1700', target: '367-848', 'rela': '0', type: 'resolved'},
+{source: '367-848', target: '247-423', 'rela': '0', type: 'resolved'},
+{source: '367-848', target: '54-425', 'rela': '1', type: 'resolved'},
+{source: '437-1700', target: '368-852', 'rela': '1', type: 'resolved'},
+{source: '368-852', target: '222-425', 'rela': '0', type: 'resolved'},
+{source: '368-852', target: '126-427', 'rela': '1', type: 'resolved'},
+{source: '474-3440', target: '438-1740', 'rela': '1', type: 'resolved'},
+{source: '438-1740', target: '369-866', 'rela': '0', type: 'resolved'},
+{source: '369-866', target: '82-432', 'rela': '0', type: 'resolved'},
+{source: '369-866', target: '48-434', 'rela': '1', type: 'resolved'},
+{source: '438-1740', target: '370-874', 'rela': '1', type: 'resolved'},
+{source: '370-874', target: '97-435', 'rela': '0', type: 'resolved'},
+{source: '370-874', target: '60-439', 'rela': '1', type: 'resolved'},
+{source: '509-60091', target: '507-34450', 'rela': '1', type: 'resolved'},
+{source: '507-34450', target: '502-15108', 'rela': '0', type: 'resolved'},
+{source: '502-15108', target: '0-7181', 'rela': '0', type: 'resolved'},
+{source: '502-15108', target: '493-7927', 'rela': '1', type: 'resolved'},
+{source: '493-7927', target: '475-3766', 'rela': '0', type: 'resolved'},
+{source: '475-3766', target: '439-1824', 'rela': '0', type: 'resolved'},
+{source: '439-1824', target: '371-893', 'rela': '0', type: 'resolved'},
+{source: '371-893', target: '242-441', 'rela': '0', type: 'resolved'},
+{source: '371-893', target: '98-452', 'rela': '1', type: 'resolved'},
+{source: '439-1824', target: '372-931', 'rela': '1', type: 'resolved'},
+{source: '372-931', target: '62-458', 'rela': '0', type: 'resolved'},
+{source: '372-931', target: '115-473', 'rela': '1', type: 'resolved'},
+{source: '475-3766', target: '440-1942', 'rela': '1', type: 'resolved'},
+{source: '440-1942', target: '373-959', 'rela': '0', type: 'resolved'},
+{source: '373-959', target: '114-475', 'rela': '0', type: 'resolved'},
+{source: '373-959', target: '100-484', 'rela': '1', type: 'resolved'},
+{source: '440-1942', target: '374-983', 'rela': '1', type: 'resolved'},
+{source: '374-983', target: '110-489', 'rela': '0', type: 'resolved'},
+{source: '374-983', target: '64-494', 'rela': '1', type: 'resolved'},
+{source: '493-7927', target: '476-4161', 'rela': '1', type: 'resolved'},
+{source: '476-4161', target: '441-2056', 'rela': '0', type: 'resolved'},
+{source: '441-2056', target: '375-1018', 'rela': '0', type: 'resolved'},
+{source: '375-1018', target: '111-509', 'rela': '0', type: 'resolved'},
+{source: '375-1018', target: '239-509', 'rela': '1', type: 'resolved'},
+{source: '441-2056', target: '153-1038', 'rela': '1', type: 'resolved'},
+{source: '476-4161', target: '442-2105', 'rela': '1', type: 'resolved'},
+{source: '442-2105', target: '376-1048', 'rela': '0', type: 'resolved'},
+{source: '376-1048', target: '3-523', 'rela': '0', type: 'resolved'},
+{source: '376-1048', target: '10-525', 'rela': '1', type: 'resolved'},
+{source: '442-2105', target: '119-1057', 'rela': '1', type: 'resolved'},
+{source: '507-34450', target: '503-19342', 'rela': '1', type: 'resolved'},
+{source: '503-19342', target: '494-9128', 'rela': '0', type: 'resolved'},
+{source: '494-9128', target: '477-4381', 'rela': '0', type: 'resolved'},
+{source: '477-4381', target: '443-2143', 'rela': '0', type: 'resolved'},
+{source: '443-2143', target: '56-1059', 'rela': '0', type: 'resolved'},
+{source: '443-2143', target: '377-1084', 'rela': '1', type: 'resolved'},
+{source: '377-1084', target: '59-536', 'rela': '0', type: 'resolved'},
+{source: '377-1084', target: '68-548', 'rela': '1', type: 'resolved'},
+{source: '477-4381', target: '444-2238', 'rela': '1', type: 'resolved'},
+{source: '444-2238', target: '378-1104', 'rela': '0', type: 'resolved'},
+{source: '378-1104', target: '201-548', 'rela': '0', type: 'resolved'},
+{source: '378-1104', target: '256-556', 'rela': '1', type: 'resolved'},
+{source: '256-556', target: '4-272', 'rela': '0', type: 'resolved'},
+{source: '256-556', target: '96-284', 'rela': '1', type: 'resolved'},
+{source: '444-2238', target: '379-1134', 'rela': '1', type: 'resolved'},
+{source: '379-1134', target: '116-563', 'rela': '0', type: 'resolved'},
+{source: '379-1134', target: '188-571', 'rela': '1', type: 'resolved'},
+{source: '494-9128', target: '478-4747', 'rela': '1', type: 'resolved'},
+{source: '478-4747', target: '445-2322', 'rela': '0', type: 'resolved'},
+{source: '445-2322', target: '380-1146', 'rela': '0', type: 'resolved'},
+{source: '380-1146', target: '36-573', 'rela': '0', type: 'resolved'},
+{source: '380-1146', target: '146-573', 'rela': '1', type: 'resolved'},
+{source: '445-2322', target: '381-1176', 'rela': '1', type: 'resolved'},
+{source: '381-1176', target: '257-586', 'rela': '0', type: 'resolved'},
+{source: '257-586', target: '89-292', 'rela': '0', type: 'resolved'},
+{source: '257-586', target: '166-294', 'rela': '1', type: 'resolved'},
+{source: '381-1176', target: '258-590', 'rela': '1', type: 'resolved'},
+{source: '258-590', target: '180-294', 'rela': '0', type: 'resolved'},
+{source: '258-590', target: '218-296', 'rela': '1', type: 'resolved'},
+{source: '478-4747', target: '446-2425', 'rela': '1', type: 'resolved'},
+{source: '446-2425', target: '382-1206', 'rela': '0', type: 'resolved'},
+{source: '382-1206', target: '259-601', 'rela': '0', type: 'resolved'},
+{source: '259-601', target: '38-300', 'rela': '0', type: 'resolved'},
+{source: '259-601', target: '210-301', 'rela': '1', type: 'resolved'},
+{source: '382-1206', target: '47-605', 'rela': '1', type: 'resolved'},
+{source: '446-2425', target: '383-1219', 'rela': '1', type: 'resolved'},
+{source: '383-1219', target: '260-608', 'rela': '0', type: 'resolved'},
+{source: '260-608', target: '43-304', 'rela': '0', type: 'resolved'},
+{source: '260-608', target: '196-304', 'rela': '1', type: 'resolved'},
+{source: '383-1219', target: '261-611', 'rela': '1', type: 'resolved'},
+{source: '261-611', target: '232-305', 'rela': '0', type: 'resolved'},
+{source: '261-611', target: '17-306', 'rela': '1', type: 'resolved'},
+{source: '503-19342', target: '495-10214', 'rela': '1', type: 'resolved'},
+{source: '495-10214', target: '479-5018', 'rela': '0', type: 'resolved'},
+{source: '479-5018', target: '447-2494', 'rela': '0', type: 'resolved'},
+{source: '447-2494', target: '384-1241', 'rela': '0', type: 'resolved'},
+{source: '384-1241', target: '262-619', 'rela': '0', type: 'resolved'},
+{source: '262-619', target: '90-309', 'rela': '0', type: 'resolved'},
+{source: '262-619', target: '113-310', 'rela': '1', type: 'resolved'},
+{source: '384-1241', target: '263-622', 'rela': '1', type: 'resolved'},
+{source: '263-622', target: '208-310', 'rela': '0', type: 'resolved'},
+{source: '263-622', target: '203-312', 'rela': '1', type: 'resolved'},
+{source: '447-2494', target: '385-1253', 'rela': '1', type: 'resolved'},
+{source: '385-1253', target: '264-626', 'rela': '0', type: 'resolved'},
+{source: '264-626', target: '2-313', 'rela': '0', type: 'resolved'},
+{source: '264-626', target: '12-313', 'rela': '1', type: 'resolved'},
+{source: '385-1253', target: '265-627', 'rela': '1', type: 'resolved'},
+{source: '265-627', target: '130-313', 'rela': '0', type: 'resolved'},
+{source: '265-627', target: '9-314', 'rela': '1', type: 'resolved'},
+{source: '479-5018', target: '448-2524', 'rela': '1', type: 'resolved'},
+{source: '448-2524', target: '386-1258', 'rela': '0', type: 'resolved'},
+{source: '386-1258', target: '266-628', 'rela': '0', type: 'resolved'},
+{source: '266-628', target: '137-314', 'rela': '0', type: 'resolved'},
+{source: '266-628', target: '172-314', 'rela': '1', type: 'resolved'},
+{source: '386-1258', target: '267-630', 'rela': '1', type: 'resolved'},
+{source: '267-630', target: '168-315', 'rela': '0', type: 'resolved'},
+{source: '267-630', target: '171-315', 'rela': '1', type: 'resolved'},
+{source: '448-2524', target: '387-1266', 'rela': '1', type: 'resolved'},
+{source: '387-1266', target: '268-632', 'rela': '0', type: 'resolved'},
+{source: '268-632', target: '161-316', 'rela': '0', type: 'resolved'},
+{source: '268-632', target: '176-316', 'rela': '1', type: 'resolved'},
+{source: '387-1266', target: '269-634', 'rela': '1', type: 'resolved'},
+{source: '269-634', target: '5-317', 'rela': '0', type: 'resolved'},
+{source: '269-634', target: '173-317', 'rela': '1', type: 'resolved'},
+{source: '495-10214', target: '480-5196', 'rela': '1', type: 'resolved'},
+{source: '480-5196', target: '449-2578', 'rela': '0', type: 'resolved'},
+{source: '449-2578', target: '388-1280', 'rela': '0', type: 'resolved'},
+{source: '388-1280', target: '270-637', 'rela': '0', type: 'resolved'},
+{source: '270-637', target: '162-318', 'rela': '0', type: 'resolved'},
+{source: '270-637', target: '212-319', 'rela': '1', type: 'resolved'},
+{source: '388-1280', target: '271-643', 'rela': '1', type: 'resolved'},
+{source: '271-643', target: '150-321', 'rela': '0', type: 'resolved'},
+{source: '271-643', target: '182-322', 'rela': '1', type: 'resolved'},
+{source: '449-2578', target: '389-1298', 'rela': '1', type: 'resolved'},
+{source: '389-1298', target: '272-647', 'rela': '0', type: 'resolved'},
+{source: '272-647', target: '132-323', 'rela': '0', type: 'resolved'},
+{source: '272-647', target: '65-324', 'rela': '1', type: 'resolved'},
+{source: '389-1298', target: '273-651', 'rela': '1', type: 'resolved'},
+{source: '273-651', target: '24-325', 'rela': '0', type: 'resolved'},
+{source: '273-651', target: '86-326', 'rela': '1', type: 'resolved'},
+{source: '480-5196', target: '450-2618', 'rela': '1', type: 'resolved'},
+{source: '450-2618', target: '390-1305', 'rela': '0', type: 'resolved'},
+{source: '390-1305', target: '274-652', 'rela': '0', type: 'resolved'},
+{source: '274-652', target: '154-326', 'rela': '0', type: 'resolved'},
+{source: '274-652', target: '170-326', 'rela': '1', type: 'resolved'},
+{source: '390-1305', target: '275-653', 'rela': '1', type: 'resolved'},
+{source: '275-653', target: '198-326', 'rela': '0', type: 'resolved'},
+{source: '275-653', target: '250-327', 'rela': '1', type: 'resolved'},
+{source: '450-2618', target: '391-1313', 'rela': '1', type: 'resolved'},
+{source: '391-1313', target: '276-656', 'rela': '0', type: 'resolved'},
+{source: '276-656', target: '8-328', 'rela': '0', type: 'resolved'},
+{source: '276-656', target: '13-328', 'rela': '1', type: 'resolved'},
+{source: '391-1313', target: '277-657', 'rela': '1', type: 'resolved'},
+{source: '277-657', target: '129-328', 'rela': '0', type: 'resolved'},
+{source: '277-657', target: '244-329', 'rela': '1', type: 'resolved'},
+
+];﻿
+var nodes = {};
+links.forEach(function(link)
+{
+  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
+});
+var width = 1920, height = 1080;
+var force = d3.layout.force()
+    .nodes(d3.values(nodes))
+    .links(links)
+    .size([width, height])
+    .linkDistance(180)
+    .charge(-1500)
+    .on("tick", tick)
+    .start();
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+var marker=
+    svg.append("marker")
+    .attr("id", "resolved")
+    .attr("markerUnits","userSpaceOnUse")
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX",32)
+    .attr("refY", -1)
+    .attr("markerWidth", 12)
+    .attr("markerHeight", 12)
+    .attr("orient", "auto")
+    .attr("stroke-width",2)
+    .append("path")
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr('fill','#000000');
+var edges_line = svg.selectAll(".edgepath")
+    .data(force.links())
+    .enter()
+    .append("path")
+    .attr({
+          'd': function(d) {return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y},
+          'class':'edgepath',
+          'id':function(d,i) {return 'edgepath'+i;}})
+    .style("stroke",function(d){
+         var lineColor;
+		 lineColor="#B43232";
+         return lineColor;
+     })
+    .style("pointer-events", "none")
+    .style("stroke-width",0.5)
+    .attr("marker-end", "url(#resolved)" );
+var edges_text = svg.append("g").selectAll(".edgelabel")
+.data(force.links())
+.enter()
+.append("text")
+.style("pointer-events", "none")
+.attr({  'class':'edgelabel',
+               'id':function(d,i){return 'edgepath'+i;},
+               'dx':80,
+               'dy':0
+               });
+edges_text.append('textPath')
+.attr('xlink:href',function(d,i) {return '#edgepath'+i})
+.style("pointer-events", "none")
+.text(function(d){return d.rela;});
+var circle = svg.append("g").selectAll("circle")
+    .data(force.nodes())
+    .enter().append("circle")
+    .style("fill",function(node){
+        var color;
+        var link=links[node.index];
+		color="#F9EBF9";
+        return color;
+    })
+    .style('stroke',function(node){ 
+        var color;
+        var link=links[node.index];
+		color="#A254A2";
+        return color;
+    })
+    .attr("r", 28)
+    .on("click",function(node)
+	{
+        edges_line.style("stroke-width",function(line){
+            console.log(line);
+            if(line.source.name==node.name || line.target.name==node.name){
+                return 4;
+            }else{
+                return 0.5;
+            }
+        });
+    })
+    .call(force.drag);
+var text = svg.append("g").selectAll("text")
+    .data(force.nodes())
+    .enter()
+    .append("text")
+    .attr("dy", ".35em")  
+    .attr("text-anchor", "middle")
+    .style('fill',function(node){
+        var color;
+        var link=links[node.index];
+		color="#A254A2";
+        return color;
+    }).attr('x',function(d){
+        var re_en = /[a-zA-Z]+/g;
+        if(d.name.match(re_en)){
+             d3.select(this).append('tspan')
+             .attr('x',0)
+             .attr('y',2)
+             .text(function(){return d.name;});
+        }
+        
+        else if(d.name.length<=4){
+             d3.select(this).append('tspan')
+            .attr('x',0)
+            .attr('y',2)
+            .text(function(){return d.name;});
+        }else{
+            var top=d.name.substring(0,4);
+            var bot=d.name.substring(4,d.name.length);
+            d3.select(this).text(function(){return '';});
+            d3.select(this).append('tspan')
+                .attr('x',0)
+                .attr('y',-7)
+                .text(function(){return top;});
+            d3.select(this).append('tspan')
+                .attr('x',0)
+                .attr('y',10)
+                .text(function(){return bot;});
+        }
+    });
+function tick() {
+  circle.attr("transform", transform1);
+  text.attr("transform", transform2);
+  edges_line.attr('d', function(d) { 
+      var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
+      return path;
+  });  
+    
+  edges_text.attr('transform',function(d,i){
+        if (d.target.x<d.source.x){
+            bbox = this.getBBox();
+            rx = bbox.x+bbox.width/2;
+            ry = bbox.y+bbox.height/2;
+            return 'rotate(180 '+rx+' '+ry+')';
+        }
+        else {
+            return 'rotate(0)';
+        }
+   });
+}
+function linkArc(d) {
+  return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y
+}
+function transform1(d) {
+  return "translate(" + d.x + "," + d.y + ")";
+}
+function transform2(d) {
+      return "translate(" + (d.x) + "," + d.y + ")";
+}
+
+var drag = force.drag()
+    .on("dragstart", dragstart);
+
+function dragstart(d) {
+  d3.select(this).classed("fixed", d.fixed = true);
+}
+
+</script>
