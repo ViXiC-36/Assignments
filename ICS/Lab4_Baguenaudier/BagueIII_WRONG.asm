@@ -1,0 +1,24 @@
+    .ORIG x3000
+    LD  R6, STACK   ; STACK ADDRESS
+    ; STARTING FROM x4001
+    LD  R0, NUM     ; NUMBER OF RINGS
+    ; STORING IN x4000
+    AND R1, R1, #0  ; STATE
+    AND R2, R2, #0  ; TEMP BIT
+    AND R4, R4, #0  ; TEMP COUNT
+    AND R3, R3, #0  ; ALL THE TIME 0 INSIDE
+    AND R5, R5, #0  ; ARGUMENT N
+    JSR REMOVE
+    HALT
+    
+REMOVE
+    ADD R4, R0, #-2
+    BRnz SKIPI
+    JSR REMOVE
+SKIPI
+    
+    
+    
+    
+STACK   .FILL   x4000
+NUM     .FILL   x4000
