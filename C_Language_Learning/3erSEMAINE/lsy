@@ -1,0 +1,13 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+ int numb;
+ int abs;
+ numb = 2022;
+ if (numb > 0)abs = numb;
+ else abs = -numb;
+ cout << "numb的绝对值是：" << abs << endl;
+ 
+}
